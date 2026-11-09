@@ -1,0 +1,56 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class taller3 extends JFrame implements ActionListener, KeyListener {
+
+    double tasa = 3200;
+
+    JTextField txtNum1 = new JTextField();
+    JTextField txtNum2 = new JTextField();
+    JTextField txtGrados = new JTextField();
+    JTextField txtDinero = new JTextField();
+
+    JButton btnSumar = new JButton("Sumar");
+    JButton btnRestar = new JButton("Restar");
+    JButton btnMultiplicar = new JButton("Multiplicar");
+    JButton btnDividir = new JButton("Dividir");
+    JButton btnCF = new JButton("°C a °F");
+    JButton btnFC = new JButton("°F a °C");
+    JButton btnUsdCop = new JButton("USD a COP");
+    JButton btnCopUsd = new JButton("COP a USD");
+
+    JLabel lblResultado = new JLabel("");
+
+    public taller3 () {
+        setTitle("Calculadora y conversor (1 USD = 3200 COP)");
+        setSize(400, 400);
+        setLayout(new GridLayout(9, 2, 5, 5));
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // operaciones
+        add(new JLabel("Numero 1:"));
+        add(txtNum1);
+        add(new JLabel("Numero 2:"));
+        add(txtNum2);
+        add(btnSumar);
+        add(btnRestar);
+        add(btnMultiplicar);
+        add(btnDividir);
+
+        // temperatura
+        add(new JLabel("Grados (°C o °F):"));
+        add(txtGrados);
+        add(btnCF);
+        add(btnFC);
+
+        // moneda
+        add(new JLabel("Dolares o pesos:"));
+        add(txtDinero);
+        add(btnUsdCop);
+        add(btnCopUsd);
+
+        add(new JLabel("Resultado:"));
+        add(lblResultado);
+
