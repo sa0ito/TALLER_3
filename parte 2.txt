@@ -1,0 +1,89 @@
+add(new JLabel("Resultado:"));
+        add(lblResultado);
+
+        btnSumar.addActionListener(this);
+        btnRestar.addActionListener(this);
+        btnMultiplicar.addActionListener(this);
+        btnDividir.addActionListener(this);
+        btnCF.addActionListener(this);
+        btnFC.addActionListener(this);
+        btnUsdCop.addActionListener(this);
+        btnCopUsd.addActionListener(this);
+
+        txtNum1.addKeyListener(this);
+        txtNum2.addKeyListener(this);
+        txtGrados.addKeyListener(this);
+        txtDinero.addKeyListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        try {
+            // suma, resta, multiplicacion y division
+            if (e.getSource() == btnSumar || e.getSource() == btnRestar || e.getSource() == btnMultiplicar || e.getSource() == btnDividir) {
+                if (txtNum1.getText().equals("") || txtNum2.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Debe llenar el Numero 1 y el Numero 2");
+                    return;
+                }
+                double n1 = Double.parseDouble(txtNum1.getText());
+                double n2 = Double.parseDouble(txtNum2.getText());
+
+                if (e.getSource() == btnSumar) lblResultado.setText(String.format("%.2f", n1 + n2));
+                if (e.getSource() == btnRestar) lblResultado.setText(String.format("%.2f", n1 - n2));
+                if (e.getSource() == btnMultiplicar) lblResultado.setText(String.format("%.2f", n1 * n2));
+                if (e.getSource() == btnDividir) {
+                    if (n2 == 0) {
+                        JOptionPane.showMessageDialog(null, "No se puede dividir entre cero");
+                    } else {
+                        lblResultado.setText(String.format("%.2f", n1 / n2));
+                    }
+                }
+            }
+
+            // temperatura
+            if (e.getSource() == btnCF || e.getSource() == btnFC) {
+                if (txtGrados.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Debe escribir los grados");
+                    return;
+                }
+                double grados = Double.parseDouble(txtGrados.getText());
+                if (e.getSource() == btnCF) {
+                    lblResultado.setText(String.format("%.2f °F", grados * 9 / 5 + 32));
+                } else {
+                    lblResultado.setText(String.format("%.2f °C", (grados - 32) * 5 / 9));
+                }
+            }
+
+            // moneda
+            if (e.getSource() == btnUsdCop || e.getSource() == btnCopUsd) {
+                if (txtDinero.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Debe escribir la cantidad de dinero");
+                    return;
+                }
+                double dinero = Double.parseDouble(txtDinero.getText());
+                if (e.getSource() == btnUsdCop) {
+                    lblResultado.setText(String.format("%.2f COP", dinero * tasa));
+                } else {
+                    lblResultado.setText(String.format("%.2f USD", dinero / tasa));
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Solo se permiten numeros");
+        }
+    }
+
+    // para que no deje escribir letras ni simbolos
+    public void keyTyped(KeyEvent e) {
+        char c = e.getKeyChar();
+        if (!Character.isDigit(c) && c != '.' && c != '-') {
+            e.consume();
+        }
+    }
+
+    public void keyPressed(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {}
+
+    public static void main(String[] args) {
+        taller_completo ventana = new taller_completo();
+        ventana.setVisible(true);
+    }
+}
